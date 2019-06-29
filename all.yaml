@@ -1,0 +1,13 @@
+---
+  vpcs:
+    - vpcname: VPC-A
+      configurations:
+        - vpccidr: 10.0.0.0/16
+          vpcregion: ap-south-1
+          IGW: yes
+    - vpcname: VPC-B
+      configurations:
+        - vpccidr: 10.1.0.0/16
+          vpcregion: ap-south-1
+          IGW: yes
+

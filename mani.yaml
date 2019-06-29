@@ -1,0 +1,11 @@
+---
+  - hosts: localhost
+    connection: local
+    become: true
+    tasks:
+      - name: debug
+        debug:
+          msg: "{{ item.0.subnetname }} {{ item.1.pusubcidr  }} {{ item.1.puaz }} {{ item.1.puregion }}"
+        with_subelements:
+          - "{{ subnets }}"
+          - configs

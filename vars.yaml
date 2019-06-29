@@ -4,7 +4,15 @@
       configurations:
         - vpccidr: 10.0.0.0/16
           vpcregion: ap-south-1
-    - vpcname: VPC-B
-      configurations:
-        - vpccidr: 10.1.0.0/16
-          vpcregion: us-west-1
+  
+  subnets:
+    - subnetname: pubsub-vpc-a
+      configs:
+        - pusubcidr: 10.0.1.0/16
+          puaz: ap-south-1a
+          puregion: ap-south-1
+    - subnetname: pubsub-vpc-b
+      configs:
+        - pusubcidr: 10.0.1.0/16
+          puaz: ap-south-1b
+          puregion: ap-south-1          

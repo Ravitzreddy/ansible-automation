@@ -1,0 +1,86 @@
+---
+  vpcs:
+    - vpcname: vpc-0fb68410b7ec2f7ec
+      configurations:
+        - vpccidr: 10.0.0.0/16
+          vpcregion: ap-south-1
+          IGW: yes
+    - vpcname: vpc-0a32c566e5acf80ca
+      configurations:
+        - vpccidr: 10.1.0.0/16
+          vpcregion: ap-south-1
+          IGW: yes
+  
+  subnetsapsouth1a:
+    - subnetname: subnet-07d3dff14a12d5dee
+      configs:
+        - subcidr: 10.0.1.0/24
+          subaz: ap-south-1a
+          subreg: ap-south-1
+          subvpcid: vpc-0fb68410b7ec2f7ec
+          subtags: publicsubnet-vpc1
+          sumap_public: yes
+    - subnetname: subnet-0dfa83a9480717556
+      configs:
+        - subcidr: 10.0.2.0/24
+          subaz: ap-south-1a
+          subreg: ap-south-1
+          subvpcid: vpc-0fb68410b7ec2f7ec
+          subtags: privatesubnet-vpc1
+          sumap_public: no
+    - subnetname: subnet-0848caab34363da82
+      configs:
+        - subcidr: 10.0.3.0/24
+          subaz: ap-south-1a
+          subreg: ap-south-1
+          subvpcid: vpc-0fb68410b7ec2f7ec
+          subtags: privatesubnet-vpc1
+          sumap_public: no
+    - subnetname: subnet-014df3c9c8da0d6f2
+      configs:
+        - subcidr: 10.1.1.0/24
+          subaz: ap-south-1a
+          subreg: ap-south-1
+          subvpcid: vpc-0a32c566e5acf80ca
+          subtags: privatesubnet-vpc2
+          sumap_public: no
+  subnetsapsouth1b:
+    - subnetname: subnet-07e95fd55dca83c36
+      configs:
+        - subcidr: 10.0.5.0/24
+          subaz: ap-south-1b
+          subreg: ap-south-1
+          subvpcid: vpc-0fb68410b7ec2f7ec
+          subtags: publicsubnet-vpc1
+          sumap_public: yes
+
+    
+  igw_routes:
+    - routename: SUB1-PUBL-VPCA-IGW
+      confs:
+        - igrvpc: vpc-0fb68410b7ec2f7ec
+          igrregion: ap-south-1
+          igrsubnet: subnet-07d3dff14a12d5dee
+          igrgatewayid: igw-0734dbde7af226d33
+    - routename: SUB5-PUBL-VPCA-IGW
+      confs:
+        - igrvpc: vpc-0fb68410b7ec2f7ec
+          igrregion: ap-south-1
+          igrsubnet: subnet-07e95fd55dca83c36
+          igrgatewayid: igw-0734dbde7af226d33
+
+  natgateways:
+    - natgatewayname: SUB3-PRIV-VPCA-NATGW
+      configure:
+        - ngsubnet: subnet-0848caab34363da82
+          ngregion: ap-south-1
+  
+  ngw_routes:
+    - routename: subnet-0848caab34363da82-NATROUTE
+      con:
+        - ngrvpc: vpc-0fb68410b7ec2f7ec
+          ngrregion: ap-south-1
+          ngrsubnet: subnet-0848caab34363da82
+          ngrgatewayid: vpc-a-NGW
+ 
+     
