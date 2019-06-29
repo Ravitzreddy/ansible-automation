@@ -1,0 +1,20 @@
+---
+  - hosts: localhost
+    connection: local
+    become: true
+    vars:
+      application: ravitz
+      vpcs:
+        - vpcname: [ 'VPC-A' ]
+        - vpccidr: [ "10.0.0.0/16" ]
+        - vpcregion: [ 'ap-south-1' ]
+    tasks:
+      - name: create vpc for "{{ item.vname }}"
+        ec2_vpc_net:
+          name: "{{ item.vname }}"
+          state: present
+          cidr_block: "10.0.0.0/16"
+          region: "{{ item.vregion }}"
+        with_items:
+          - { vname: "{{ vpcs[0].vpcname }}" , vcidr: "{{ vpcs[0].vpccidr }}" , vregion: "{{ vpcs[0].vpcregion }}" }
+

@@ -1,0 +1,24 @@
+---
+  - hosts: localhost
+    connection: local
+    become: true
+    #vars:
+    #  vpcs:
+    #    - vpcname: VPC-A
+    #      configurations:
+    #        - vpccidr: 10.0.0.0/16
+    #          vpcregion: ap-south-1
+    #    - vpcname: VPC-B
+    #      configurations:
+    #        - vpccidr: 10.1.0.0/16
+    #          vpcregion: us-west-1
+    tasks:
+      - name: create vpc for "{{ item.vname }}"
+        ec2_vpc_net:
+          name: "{{ item.0.vpcname }}"
+          state: present
+          cidr_block: "{{ item.1.vpccidr }}"
+          region: "{{ item.1.vpcregion }}"
+        with_subelements:
+          - "{{vpcs}}"
+          - configurations

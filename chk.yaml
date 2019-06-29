@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars:
+    vpcs:
+      - vpcname: [ 'vpc1' , 'vpc2' ]
+  tasks:
+    - name: List children
+      debug:
+        msg: " {{item.vname}} "
+      with_items:
+        - { vname: "{{ vpcs[0].vpcname }}" } 
